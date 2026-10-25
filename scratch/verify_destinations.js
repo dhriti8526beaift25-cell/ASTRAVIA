@@ -1,6 +1,6 @@
 import { validateAstraviaData } from "../src/services/dataValidator.js";
-import destinations, { countries, regions } from "../src/data/destinations.js";
-import { virtualTours, getVirtualTour } from "../src/data/virtualTours.js";
+import destinations from "../src/data/destinations.js";
+import { getVirtualTour } from "../src/data/virtualTours.js";
 import hotels from "../src/data/hotels.js";
 
 console.log("=== ASTRAVIA DESTINATION DATA SYNCHRONIZATION AUDIT ===");

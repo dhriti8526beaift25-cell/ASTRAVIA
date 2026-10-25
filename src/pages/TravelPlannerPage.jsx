@@ -1,16 +1,8 @@
-import TravelPlanner from "../components/TravelPlanner";
+import Itinerary from "./Itinerary";
 
 /**
- * TravelPlannerPage Component (Evaluation-I)
- * Dedicated Multi-Page Trip Planner & Custom Itinerary Generator.
- * Demonstrates: Controlled components, form validation, state management.
+ * TravelPlannerPage Component (Alias for Itinerary)
+ * Re-exports the Itinerary Builder for both /itinerary and /plan routes.
  */
-export function TravelPlannerPage() {
-  return (
-    <main style={{ paddingTop: "120px", paddingBottom: "100px", minHeight: "85vh" }}>
-      <TravelPlanner />
-    </main>
-  );
-}
-
-export default TravelPlannerPage;
+export { Itinerary as TravelPlannerPage };
+export default Itinerary;

@@ -79,7 +79,9 @@ export function DestinationCard({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onToggleSave && onToggleSave(destination.id);
+                if (onToggleSave) {
+                  onToggleSave(destination.id);
+                }
               }}
               title={isSaved ? "Remove from My Journey" : "Save to My Journey"}
               aria-label={isSaved ? "Remove from favorites" : "Add to favorites"}

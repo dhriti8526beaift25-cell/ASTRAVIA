@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import destinations, { countries, regions, continents } from "../data/destinations";
+import destinations, { countries, regions } from "../data/destinations";
 
 /**
  * GlobalSearchModal Component

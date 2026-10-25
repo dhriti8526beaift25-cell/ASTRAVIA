@@ -21,7 +21,7 @@ export function Home() {
       <Hero />
 
       {/* 2. Global Continents Discovery Strip */}
-      <section style={{ padding: "90px 4vw", background: "var(--bg-void)" }}>
+      <section id="explore-continents" style={{ padding: "90px 4vw", background: "var(--bg-void)" }}>
         <div className="section-header">
           <span className="section-eyebrow">CONTINENTS OF WONDER</span>
           <h2 className="section-title">EXPLORE BY CONTINENT</h2>
@@ -34,7 +34,7 @@ export function Home() {
           {continents.map((cont) => (
             <Link
               key={cont.id}
-              to="/discover"
+              to={`/explore?continent=${cont.id}`}
               className="experience-card"
               style={{ height: "340px" }}
             >
@@ -51,7 +51,7 @@ export function Home() {
                   {cont.tagline}
                 </p>
                 <span className="card-action-btn" style={{ padding: "8px 14px", fontSize: "9.5px", display: "inline-flex" }}>
-                  DISCOVER &rarr;
+                  EXPLORE &rarr;
                 </span>
               </div>
             </Link>
@@ -101,7 +101,7 @@ export function Home() {
                   <Link to={`/destination/${dest.id}`} className="card-action-btn" style={{ flex: 1 }}>
                     OVERVIEW
                   </Link>
-                  <Link to={`/virtual-journey/${dest.id}`} className="card-action-btn" style={{ flex: 1, background: "var(--accent-gold)", color: "#060c0e" }}>
+                  <Link to={`/journey/${dest.id}`} className="card-action-btn" style={{ flex: 1, background: "var(--accent-gold)", color: "#060c0e" }}>
                     360° TOUR &rarr;
                   </Link>
                 </div>
@@ -111,8 +111,8 @@ export function Home() {
         </div>
 
         <div style={{ textAlign: "center" }}>
-          <Link to="/discover" className="btn-primary">
-            DISCOVER ALL GLOBAL DESTINATIONS &rarr;
+          <Link to="/explore" className="btn-primary">
+            EXPLORE ALL GLOBAL DESTINATIONS &rarr;
           </Link>
         </div>
       </section>

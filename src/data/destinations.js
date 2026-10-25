@@ -1076,6 +1076,121 @@ export const destinations = [
     gallery: [{ id: "azulejos-tiles", title: "Goan-Portuguese Azulejo Tiles", category: "CERAMIC ART", date: "18th Century", image: "/goa.jpg", description: "Hand-painted cobalt blue tiles.", context: "Decorates historic Fontainhas facades." }],
     itinerary: [{ day: 1, title: "Old Goa & Fontainhas", desc: "Tour Basilica of Bom Jesus and Latin Quarter." }],
     quiz: [{ question: "What is the historic Latin Quarter in Panaji called?", options: ["Fontainhas", "Campal", "Miramar", "Dona Paula"], correctIndex: 0, explanation: "Fontainhas is the historic Latin Quarter in Panaji." }]
+  },
+
+  // 15. ZERMATT & MATTERHORN (Switzerland)
+  {
+    id: "zermatt",
+    name: "ZERMATT & MATTERHORN",
+    country: "Switzerland",
+    countryId: "switzerland",
+    continent: "Europe",
+    continentId: "europe",
+    state: "Valais",
+    stateId: "valais-matterhorn",
+    title: "Crown of the Swiss Alps",
+    tagline: "Glacial majesty beneath the pyramid of the Matterhorn.",
+    quote: "Where crystal alpine summits pierce the cobalt sky in timeless stillness.",
+    description: "Nestled at the base of the iconic Matterhorn, Zermatt is a car-free alpine sanctuary offering world-class skiing, cogwheel rail journeys, and ancient Swiss chalet hamlets.",
+    category: "MOUNTAINS",
+    type: "Mountain",
+    region: "Swiss Alps",
+    bestTime: "December – April & July – September",
+    duration: "4–6 Days",
+    idealFor: "Matterhorn Vistas · Alpine Glaciers · Cogwheel Railway · Fondue",
+    image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=1200&auto=format&fit=crop",
+    video: "/hero-kashmir.mp4",
+    altitude: "1,620 m – 3,883 m",
+    coordinates: { x: 50, y: 32, lat: "45.9765° N", lng: "7.7491° E" },
+    highlights: ["Matterhorn Glacier Paradise (3,883m)", "Gornergrat Bahn Cogwheel Railway", "Riffelsee mirror lake reflection", "Traditional Swiss Fondue"],
+    scenes: [{ id: "gornergrat-summit", title: "Gornergrat Summit Vista", subtitle: "Matterhorn Panoramic Lookout", image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=1200&auto=format&fit=crop", description: "Perched at 3,135 meters looking out over 29 glaciers." }],
+    hotspots: [
+      { id: "matterhorn-peak", title: "The Matterhorn Pyramid Peak", subtitle: "Alpine Icon (4,478m)", x: 50, y: 30, image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800&auto=format&fit=crop", category: "NATURE", description: "One of the most recognizable mountain spires on Earth.", fact: "First summited in 1865 by Edward Whymper." },
+      { id: "gornergrat-railway", title: "Gornergrat Cogwheel Train", subtitle: "Historic Alpine Transit", x: 70, y: 60, image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800&auto=format&fit=crop", category: "ENGINEERING", description: "Europe's first fully electric cogwheel railway, operating since 1898.", fact: "Climbs 1,469 vertical meters in just 33 minutes." }
+    ],
+    gallery: [{ id: "alphorn-instrument", title: "Traditional Swiss Alphorn", category: "FOLK INSTRUMENT", date: "Traditional", image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800&auto=format&fit=crop", description: "Handcrafted wooden alpine horn used by herdsmen to communicate across valleys.", context: "A symbol of Swiss alpine heritage." }],
+    itinerary: [
+      { day: 1, title: "Zermatt Village & Acclimatization", desc: "Arrive via Glacier Express, explore wooden chalets in Hinterdorf." },
+      { day: 2, title: "Gornergrat & Riffelsee Reflections", desc: "Take cogwheel railway to Gornergrat and photograph the Matterhorn reflected in alpine lakes." },
+      { day: 3, title: "Matterhorn Glacier Paradise", desc: "Ascend Europe's highest cable car station to 3,883m and explore the ice palace." }
+    ],
+    quiz: [{ question: "What is the elevation of the Matterhorn peak?", options: ["4,478 meters", "3,883 meters", "4,807 meters", "2,962 meters"], correctIndex: 0, explanation: "The Matterhorn peak towers at 4,478 meters above sea level." }]
+  },
+
+  // 16. SYDNEY & HARBOUR (Australia)
+  {
+    id: "sydney",
+    name: "SYDNEY & HARBOUR",
+    country: "Australia",
+    countryId: "australia",
+    continent: "Oceania",
+    continentId: "oceania",
+    state: "New South Wales",
+    stateId: "nsw-sydney",
+    title: "Harbour of Light & Sails",
+    tagline: "Where iconic architectural sails meet the sunlit Pacific.",
+    quote: "A sun-drenched metropolis framed by golden beaches and architectural wonder.",
+    description: "From the sculptural sails of the Sydney Opera House and the majestic Harbour Bridge to the golden sands of Bondi Beach, Sydney is Australia's cultural jewel.",
+    category: "ARCHITECTURE",
+    type: "Architecture",
+    region: "Pacific Coast",
+    bestTime: "September – November & March – May",
+    duration: "4–6 Days",
+    idealFor: "Harbour Cruises · Opera House · Bondi Coastal Walk · Seafood",
+    image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=1200&auto=format&fit=crop",
+    video: "/hero-kashmir.mp4",
+    altitude: "0 m – 130 m",
+    coordinates: { x: 88, y: 78, lat: "33.8688° S", lng: "151.2093° E" },
+    highlights: ["Sydney Opera House UNESCO sails", "Sydney Harbour Bridge Climb", "Bondi to Coogee coastal clifftop walk", "Taronga Zoo harbour panoramas"],
+    scenes: [{ id: "opera-house-scene", title: "Circular Quay & Opera House", subtitle: "Sydney Harbour", image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=1200&auto=format&fit=crop", description: "Gazing across deep harbour waters at the expressionist sails." }],
+    hotspots: [
+      { id: "opera-house-sails", title: "Sydney Opera House", subtitle: "UNESCO Masterpiece", x: 55, y: 45, image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=800&auto=format&fit=crop", category: "ARCHITECTURE", description: "Designed by Danish architect Jørn Utzon, opened in 1973.", fact: "Its roof is covered with over 1 million ceramic Swedish tiles." }
+    ],
+    gallery: [{ id: "aboriginal-art", title: "Indigenous Dot Painting", category: "FIRST NATIONS ART", date: "Contemporary Heritage", image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=800&auto=format&fit=crop", description: "Sacred storytelling art created by First Nations elders.", context: "Celebrates the world's oldest continuous living culture." }],
+    itinerary: [
+      { day: 1, title: "Harbour Icons & The Rocks", desc: "Walk through historic Rocks precinct and tour the Opera House." },
+      { day: 2, title: "Bondi to Coogee Coastal Trek", desc: "Hike along dramatic sandstone sea cliffs and swim in ocean rock pools." },
+      { day: 3, title: "Blue Mountains Day Journey", desc: "Discover the Three Sisters sandstone pinnacles and eucalyptus canyons." }
+    ],
+    quiz: [{ question: "Who was the architect of the Sydney Opera House?", options: ["Jørn Utzon", "Frank Gehry", "Norman Foster", "Renzo Piano"], correctIndex: 0, explanation: "Danish architect Jørn Utzon won the international competition to design the Sydney Opera House in 1957." }]
+  },
+
+  // 17. REYKJAVIK & ICELAND (Iceland)
+  {
+    id: "reykjavik",
+    name: "REYKJAVIK & ICELAND",
+    country: "Iceland",
+    countryId: "iceland",
+    continent: "Europe",
+    continentId: "europe",
+    state: "Capital Region",
+    stateId: "capital-iceland",
+    title: "Land of Fire & Ice",
+    tagline: "Glaciers, geothermal springs and celestial northern lights.",
+    quote: "A primordial realm where volcanic heat sculpts glacial silence.",
+    description: "Iceland's capital gateway leads to roaring waterfalls, steaming geothermal lagoons, black basalt beaches, and winter auroras glowing across the Arctic night.",
+    category: "NATURE",
+    type: "Nature",
+    region: "Nordic Atlantic",
+    bestTime: "June – August & October – March",
+    duration: "5–7 Days",
+    idealFor: "Aurora Borealis · Geysers · Glacier Lagoons · Blue Lagoon",
+    image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=1200&auto=format&fit=crop",
+    video: "/hero-kashmir.mp4",
+    altitude: "0 m – 914 m",
+    coordinates: { x: 42, y: 18, lat: "64.1466° N", lng: "21.9426° W" },
+    highlights: ["Golden Circle: Gullfoss Waterfall & Geysir", "Blue Lagoon Geothermal Spa", "Reynisfjara Black Sand Beach", "Aurora Borealis Night Hunting"],
+    scenes: [{ id: "gullfoss-scene", title: "Gullfoss Golden Falls", subtitle: "Hvítá River Canyon", image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=1200&auto=format&fit=crop", description: "Massive double cascade plunging into a deep rugged fissure." }],
+    hotspots: [
+      { id: "geysir-strokkur", title: "Strokkur Erupting Geyser", subtitle: "Haukadalur Geothermal Valley", x: 45, y: 50, image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=800&auto=format&fit=crop", category: "NATURE", description: "Spouts boiling mineral water up to 30 meters high every 6 to 10 minutes.", fact: "Gave its name to all geysers across the globe." }
+    ],
+    gallery: [{ id: "icelandic-lopapeysa", title: "Handknit Lopapeysa Wool Sweater", category: "TEXTILE HERITAGE", date: "Traditional", image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=800&auto=format&fit=crop", description: "Knitted from unspun Icelandic lopi fleece, weather-resistant and warm.", context: "Shielded Norse fishermen and shepherds for generations." }],
+    itinerary: [
+      { day: 1, title: "Reykjavik Old Town & Hallgrímskirkja", desc: "Climb Hallgrímskirkja tower and relax in local geothermal bath." },
+      { day: 2, title: "The Golden Circle Expedition", desc: "Witness Þingvellir rift valley, Geysir eruptions, and Gullfoss waterfall." },
+      { day: 3, title: "South Coast Black Sands & Glaciers", desc: "Walk Reynisfjara basalt columns and visit Skógafoss waterfall." }
+    ],
+    quiz: [{ question: "What celestial phenomenon glows green in the Icelandic winter sky?", options: ["Aurora Borealis", "Halley's Comet", "Zodiacal Light", "Solar Flare"], correctIndex: 0, explanation: "The Aurora Borealis (Northern Lights) occurs when charged solar particles collide with Earth's magnetic atmosphere." }]
   }
 ];
 
@@ -1238,6 +1353,94 @@ export function getBeforeYouGo(dest) {
       visaInfo: "Schengen Area Visa",
       travelTip: "Always carry a reusable water bottle to fill from Rome's 2,500 historic 'Nasoni' public fountains.",
       accessibility: "Cobblestone streets require sturdy footwear; Colosseum and Vatican have elevator lifts."
+    },
+    zermatt: {
+      bestTime: "December – April & July – September",
+      estimatedBudget: "₹₹₹₹ (High Alpine)",
+      languages: "German, Swiss German, French, English",
+      currency: "Swiss Franc (CHF)",
+      localTransport: "Gornergrat Cogwheel Railway, Matterhorn Glacier Express Cableways, E-taxis",
+      localFood: "Alpine Cheese Fondue, Raclette, Valais Dried Beef, Rösti, Swiss Chocolate",
+      visaInfo: "Schengen Visa (Switzerland is part of the Schengen zone)",
+      travelTip: "Zermatt is strictly combustion-engine car-free; arrive via the scenic Matterhorn Gotthard Bahn from Täsch.",
+      accessibility: "Modern low-floor mountain trains and accessible cable car cabins to 3,883m."
+    },
+    sydney: {
+      bestTime: "September – November & March – May",
+      estimatedBudget: "₹₹₹ (Moderate to High)",
+      languages: "English",
+      currency: "Australian Dollar (AUD)",
+      localTransport: "Sydney Ferries (Opal / Contactless), Sydney Trains, Light Rail, Metro",
+      localFood: "Fresh Sydney Rock Oysters, Grilled Barramundi, Pavlova, Flat White specialty coffee",
+      visaInfo: "Australian Subclass 600 Tourist Visa or eVisitor (ETA)",
+      travelTip: "Tap on and off with any contactless bank card across all ferries, light rail, and trains.",
+      accessibility: "Circular Quay and major ferry wharves are fully accessible with level roll-on boarding."
+    },
+    reykjavik: {
+      bestTime: "June – August (Midnight Sun) & October – March (Aurora)",
+      estimatedBudget: "₹₹₹₹ (Nordic)",
+      languages: "Icelandic (English universally spoken)",
+      currency: "Icelandic Króna (ISK)",
+      localTransport: "Strætó City Buses, Superjeep excursions, Rental 4x4 vehicles",
+      localFood: "Wild Arctic Char, Plokkfiskur (Fish Stew), Geothermal Rye Bread, Skyr yoghurt",
+      visaInfo: "Schengen Area Visa",
+      travelTip: "Always check safetravel.is and vedur.is daily before driving onto rural Icelandic roads.",
+      accessibility: "Central Reykjavik is paved with curb cuts; Blue Lagoon features water-accessible wheelchairs."
+    },
+    ladakh: {
+      bestTime: "June – September (Open mountain passes)",
+      estimatedBudget: "₹₹ (Moderate)",
+      languages: "Ladakhi, Tibetan, Hindi, English",
+      currency: "Indian Rupee (₹)",
+      localTransport: "Ladakh Taxi Union 4x4 SUVs, Royal Enfield rentals, Shared Cabs",
+      localFood: "Hot Steamed Tingmo with curry, Thukpa noodle soup, Apricot jam, Butter tea (Gur Gur Chai)",
+      visaInfo: "Domestic Destination (Inner Line Permits required for Pangong Lake, Nubra Valley, Khardung La)",
+      travelTip: "Mandatory complete rest for the first 48 hours in Leh (3,500m) to acclimatize and prevent acute mountain sickness.",
+      accessibility: "High-altitude terrain requires good physical stamina; main Leh market is pedestrianized."
+    },
+    rajasthan: {
+      bestTime: "October – March (Cool desert winter)",
+      estimatedBudget: "₹₹ (Budget to Luxury)",
+      languages: "Rajasthani, Hindi, Marwari, English",
+      currency: "Indian Rupee (₹)",
+      localTransport: "Auto-rickshaws, Heritage Palace Cabs, Jaipur Metro, Camels in Sam Dunes",
+      localFood: "Dal Baati Churma with pure ghee, Gatte ki Sabzi, Laal Maas, Ker Sangri, Ghevar sweets",
+      visaInfo: "Domestic tourist destination (Indian ID required, standard tourist visa for internationals)",
+      travelTip: "Book a licensed local heritage guide at Amber Fort and Mehrangarh to unlock centuries of royal Rajput chronicles.",
+      accessibility: "Elevators available at Mehrangarh Fort; palace courtyards feature paved sandstone corridors."
+    },
+    kerala: {
+      bestTime: "September – March (Post-monsoon freshness)",
+      estimatedBudget: "₹₹ (Moderate)",
+      languages: "Malayalam, English (Widely understood)",
+      currency: "Indian Rupee (₹)",
+      localTransport: "Kettuvallam Traditional Houseboats, State Water Transport Ferries, Auto-rickshaws",
+      localFood: "Appam with Ishtu, Karimeen Pollichathu (Pearl Spot Fish wrapped in banana leaf), Malabar Parotta, Elaneer (Tender Coconut)",
+      visaInfo: "Domestic destination (Standard Indian guidelines)",
+      travelTip: "Book a certified solar-powered or eco-friendly houseboat in Alleppey for tranquil overnight backwater cruising.",
+      accessibility: "Houseboat boarding requires step assistance; resorts feature level backwater gardens."
+    },
+    meghalaya: {
+      bestTime: "October – April (Clear skies and turquoise rivers)",
+      estimatedBudget: "₹₹ (Moderate)",
+      languages: "Khasi, Garo, Pnar, English (Official State Language)",
+      currency: "Indian Rupee (₹)",
+      localTransport: "Shillong Local Taxis, Shared Sumos, Guided Treks",
+      localFood: "Jadoh (Aromatic rice dish), Dohneiiong (Pork with black sesame paste), Tungrymbai, Khasi Wild Flower Honey",
+      visaInfo: "Domestic destination (Valid Indian photo ID required)",
+      travelTip: "Wear high-traction hiking shoes for the 3,500-step trek down into Nongriat valley to witness the Double Decker Living Root Bridge.",
+      accessibility: "Root bridge hikes involve steep concrete village stairs; viewpoint pavilions in Cherrapunji are road-accessible."
+    },
+    goa: {
+      bestTime: "November – February (Pleasant coastal breezes)",
+      estimatedBudget: "₹₹ (Moderate)",
+      languages: "Konkani, Marathi, English, Hindi",
+      currency: "Indian Rupee (₹)",
+      localTransport: "Rented Scooters, Pilot Taxis, Private Cabs, River Ferries",
+      localFood: "Goan Fish Thali with Kingfish, Pork Vindaloo, Chicken Xacuti, Bebinca layered coconut dessert",
+      visaInfo: "Domestic destination (Standard Indian guidelines)",
+      travelTip: "Head south to Palolem, Cola, and Cabo de Rama for peaceful secluded sands away from crowded northern beach strips.",
+      accessibility: "Major beach resorts and churches have ramped access; sand wheelchairs available at select beaches."
     }
   };
 

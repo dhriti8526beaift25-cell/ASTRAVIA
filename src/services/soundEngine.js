@@ -46,12 +46,16 @@ class SoundEngine {
       if (gain) {
         try {
           gain.gain.setTargetAtTime(0.0001, this.ctx.currentTime, fadeTime / 3);
-        } catch (e) {}
+        } catch {
+          // Fade fallback
+        }
       }
       if (source) {
         try {
           source.stop(stopTime);
-        } catch (e) {}
+        } catch {
+          // Source stop fallback
+        }
       }
     });
 
@@ -241,7 +245,9 @@ class SoundEngine {
 
         osc.start(now);
         osc.stop(now + 0.24);
-      } catch (e) {}
+      } catch {
+        // Osc fallback
+      }
     }, 4500 + Math.random() * 4000);
 
     this.currentNodes.push({ intervalId });

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Panorama360Viewer from "./Panorama360Viewer";
 import HotspotModal from "./HotspotModal";
 import TourQuizModal from "./TourQuizModal";
@@ -18,22 +18,22 @@ export function VirtualTour({
   isAudioPlaying = false,
   onToggleAudio
 }) {
-  const navigate = useNavigate();
   const containerRef = useRef(null);
 
   // Load centralized rich virtual tour data
   const tourData = useMemo(() => getVirtualTour(destination?.id), [destination?.id]);
-  const allTourScenes = tourData.scenes || [];
 
   // Filter scenes strictly by destinationId to prevent ANY cross-destination contamination
   const scenes = useMemo(() => {
+    const allTourScenes = tourData.scenes || [];
     return allTourScenes.filter((sc) => !sc.destinationId || sc.destinationId === destination?.id);
-  }, [allTourScenes, destination?.id]);
+  }, [tourData, destination?.id]);
 
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
   const [activeHotspot, setActiveHotspot] = useState(null);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(isAudioPlaying);
+  const [isInfoPanelOpen, setIsInfoPanelOpen] = useState(false);
 
   // Discovered progress tracking
   const [discoveredSpotIds, setDiscoveredSpotIds] = useState([]);
@@ -45,6 +45,7 @@ export function VirtualTour({
     setActiveHotspot(null);
     setIsQuizOpen(false);
     setIsJourneyComplete(false);
+    setIsInfoPanelOpen(false);
     soundEngine.stop();
     soundEngine.stopNarration();
   }, [destination?.id]);
@@ -69,7 +70,9 @@ export function VirtualTour({
       const savedProgress = JSON.parse(localStorage.getItem("astravia_discovered_hotspots") || "{}");
       const destProgress = savedProgress[destination.id] || [];
       setDiscoveredSpotIds(destProgress);
-    } catch (e) {}
+    } catch {
+      // LocalStorage access fallback
+    }
   }, [destination?.id]);
 
   // Manage Soundscape playback based on active scene soundProfile
@@ -120,7 +123,9 @@ export function VirtualTour({
               localStorage.setItem("astravia_passport_stamps", JSON.stringify(stamps));
             }
           }
-        } catch (e) {}
+        } catch {
+          // LocalStorage fallback
+        }
         return updated;
       }
       return prev;
@@ -240,6 +245,20 @@ export function VirtualTour({
               🏆 QUIZ
             </button>
           )}
+
+          {/* Destination Intel Panel Toggle */}
+          <button
+            className="tour-tool-btn"
+            onClick={() => setIsInfoPanelOpen(!isInfoPanelOpen)}
+            style={{
+              background: isInfoPanelOpen ? "rgba(197, 162, 106, 0.25)" : "rgba(6, 12, 15, 0.85)",
+              borderColor: isInfoPanelOpen ? "var(--accent-gold)" : "var(--border-subtle)",
+              color: isInfoPanelOpen ? "var(--accent-gold-light)" : "var(--text-secondary)"
+            }}
+            title="Destination Intelligence & Facts"
+          >
+            ℹ INTEL
+          </button>
 
           {/* Fullscreen Toggle */}
           <button className="tour-tool-btn" onClick={toggleFullscreen} title="Toggle Fullscreen">
@@ -463,6 +482,94 @@ export function VirtualTour({
           destinationId={destination.id}
           onClose={() => setIsQuizOpen(false)}
         />
+      )}
+
+      {/* 7. Slide-Out Destination Information Panel */}
+      {isInfoPanelOpen && (
+        <aside
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: "min(380px, 90vw)",
+            background: "rgba(6, 12, 15, 0.96)",
+            backdropFilter: "blur(24px)",
+            borderLeft: "1px solid var(--border-gold)",
+            zIndex: 45,
+            padding: "32px 24px",
+            display: "flex",
+            flexDirection: "column",
+            overflowY: "auto",
+            boxShadow: "-10px 0 40px rgba(0,0,0,0.8)"
+          }}
+          aria-label="Destination Information Panel"
+        >
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+            <span className="modal-category-tag">DESTINATION INTEL</span>
+            <button
+              onClick={() => setIsInfoPanelOpen(false)}
+              style={{ background: "none", border: "none", color: "var(--text-muted)", fontSize: "22px", cursor: "pointer" }}
+              aria-label="Close information panel"
+            >
+              &times;
+            </button>
+          </div>
+
+          <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", color: "var(--text-primary)", margin: "0 0 4px" }}>
+            {destination.name}
+          </h3>
+          <p style={{ fontSize: "11px", letterSpacing: "1.5px", color: "var(--accent-gold-light)", textTransform: "uppercase", marginBottom: "14px" }}>
+            {destination.country} &bull; {destination.region}
+          </p>
+
+          <p style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.65", marginBottom: "24px" }}>
+            {destination.description}
+          </p>
+
+          <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: "var(--radius-sm)", padding: "14px", border: "1px solid var(--border-subtle)", marginBottom: "20px" }}>
+            <p style={{ fontSize: "11.5px", color: "var(--text-primary)", margin: "0 0 6px" }}>
+              <strong>Best Time:</strong> {destination.bestTime}
+            </p>
+            <p style={{ fontSize: "11.5px", color: "var(--text-primary)", margin: "0 0 6px" }}>
+              <strong>Duration:</strong> {destination.duration}
+            </p>
+            {destination.altitude && (
+              <p style={{ fontSize: "11.5px", color: "var(--text-primary)", margin: 0 }}>
+                <strong>Altitude:</strong> {destination.altitude}
+              </p>
+            )}
+          </div>
+
+          <h4 style={{ fontSize: "12px", letterSpacing: "1.5px", color: "var(--accent-gold)", textTransform: "uppercase", marginBottom: "10px" }}>
+            SIGNATURE HIGHLIGHTS
+          </h4>
+          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "8px" }}>
+            {destination.highlights?.map((h, i) => (
+              <li key={i} style={{ fontSize: "12px", color: "var(--text-secondary)", display: "flex", gap: "8px" }}>
+                <span style={{ color: "var(--accent-gold)" }}>✦</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "10px" }}>
+            <Link
+              to={`/itinerary?destination=${destination.id}`}
+              className="btn-primary"
+              style={{ textAlign: "center", padding: "10px", fontSize: "11px" }}
+            >
+              BUILD ITINERARY FOR THIS &rarr;
+            </Link>
+            <Link
+              to={`/destination/${destination.id}`}
+              className="btn-secondary"
+              style={{ textAlign: "center", padding: "10px", fontSize: "11px" }}
+            >
+              VIEW FULL OVERVIEW
+            </Link>
+          </div>
+        </aside>
       )}
     </div>
   );

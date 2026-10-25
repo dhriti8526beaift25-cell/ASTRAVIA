@@ -8,9 +8,11 @@ import destinations from "../data/destinations";
  * Strictly binds to the route destination ID with graceful fallback.
  */
 export function VirtualTourPage() {
-  const { id } = useParams();
+  const { id, destination: destParam } = useParams();
+  const rawId = destParam || id || "";
+  const targetId = rawId.toLowerCase().trim();
 
-  const destination = destinations.find((d) => d.id === id);
+  const destination = destinations.find((d) => d.id.toLowerCase() === targetId);
 
   if (!destination) {
     return (

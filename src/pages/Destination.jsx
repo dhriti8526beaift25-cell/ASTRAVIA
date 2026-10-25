@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
-import destinations, { getBeforeYouGo } from "../data/destinations";
+import destinations, { getBeforeYouGo, stories } from "../data/destinations";
 
 /**
  * Destination Page (Global Detail Showcase)
@@ -9,9 +9,11 @@ import destinations, { getBeforeYouGo } from "../data/destinations";
  * Strictly binds to route destination ID.
  */
 export function Destination({ savedIds = [], onToggleSave }) {
-  const { id } = useParams();
+  const { id, destination: destParam } = useParams();
+  const rawId = destParam || id || "";
+  const targetId = rawId.toLowerCase().trim();
 
-  const destination = destinations.find((d) => d.id === id);
+  const destination = destinations.find((d) => d.id.toLowerCase() === targetId);
 
   if (!destination) {
     return (
@@ -31,10 +33,10 @@ export function Destination({ savedIds = [], onToggleSave }) {
           Destination Not Found
         </h1>
         <p style={{ color: "var(--text-secondary)", maxWidth: "480px", marginBottom: "32px", fontSize: "14px" }}>
-          The destination "{id}" does not exist or has moved. Browse our catalog of global destinations.
+          The destination "{rawId}" does not exist in our global index. Browse our catalog of global destinations.
         </p>
-        <Link to="/discover" className="btn-primary">
-          DISCOVER ALL DESTINATIONS &rarr;
+        <Link to="/explore" className="btn-primary">
+          EXPLORE ALL DESTINATIONS &rarr;
         </Link>
       </main>
     );
@@ -42,11 +44,12 @@ export function Destination({ savedIds = [], onToggleSave }) {
 
   const isSaved = savedIds.includes(destination.id);
   const beforeYouGo = getBeforeYouGo(destination);
+  const matchedStory = stories ? stories.find((s) => s.destinationId === destination.id) : null;
 
   const breadcrumbItems = [
-    { label: destination.continent || "Global", to: "/discover" },
+    { label: destination.continent || "Global", to: `/explore?continent=${destination.continentId || "asia"}` },
     { label: destination.country || "World", to: `/country/${destination.countryId || "india"}` },
-    { label: destination.state || destination.region || "Region", to: "/discover" },
+    { label: destination.state || destination.region || "Region", to: "/explore" },
     { label: destination.name, to: null }
   ];
 
@@ -90,16 +93,22 @@ export function Destination({ savedIds = [], onToggleSave }) {
               </div>
             </div>
 
-            {/* Action CTAs */}
-            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-              <Link to={`/virtual-journey/${destination.id}`} className="btn-primary">
-                BEGIN VIRTUAL JOURNEY &rarr;
+            {/* Action CTAs: Enter 360, Build Itinerary, Save */}
+            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center" }}>
+              <Link to={`/journey/${destination.id}`} className="btn-primary" id="enter-360-experience-btn">
+                ENTER 360° EXPERIENCE &rarr;
+              </Link>
+              <Link to={`/itinerary?destination=${destination.id}`} className="btn-secondary" id="build-my-itinerary-btn">
+                BUILD MY ITINERARY
               </Link>
               <button
                 className="btn-secondary"
-                onClick={() => onToggleSave && onToggleSave(destination.id)}
+                onClick={() => {
+                  if (onToggleSave) onToggleSave(destination.id);
+                }}
+                id="save-destination-btn"
               >
-                {isSaved ? "♥ SAVED TO JOURNEY" : "♡ SAVE TO JOURNEY"}
+                {isSaved ? "♥ SAVED TO MY JOURNEY" : "♡ SAVE TO MY JOURNEY"}
               </button>
             </div>
           </div>
@@ -266,6 +275,39 @@ export function Destination({ savedIds = [], onToggleSave }) {
         </section>
       )}
 
+      {/* Cultural Story & Historical Heritage Section */}
+      <section style={{ padding: "70px 4vw", background: "var(--bg-void)" }}>
+        <div className="section-header">
+          <span className="section-eyebrow">CULTURAL CHRONICLE</span>
+          <h2 className="section-title">STORIES OF {destination.name.toUpperCase()}</h2>
+          <p className="section-subtitle">
+            Ancient myths, oral histories, and the living soul of {destination.name}.
+          </p>
+        </div>
+
+        <div style={{ maxWidth: "900px", margin: "0 auto", background: "var(--bg-card)", border: "1px solid var(--border-gold)", borderRadius: "var(--radius-lg)", padding: "36px", position: "relative" }}>
+          <span style={{ position: "absolute", top: "20px", right: "24px", fontSize: "36px", opacity: 0.15, color: "var(--accent-gold)" }}>❦</span>
+          <span style={{ fontSize: "10.5px", letterSpacing: "2px", color: "var(--accent-gold)", fontWeight: "bold", textTransform: "uppercase" }}>
+            LIVING TRADITIONS &bull; {destination.country}
+          </span>
+          <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", color: "var(--text-primary)", margin: "8px 0 16px" }}>
+            {matchedStory?.title || `The Timeless Spirit of ${destination.name}`}
+          </h3>
+          <p style={{ color: "var(--text-secondary)", fontSize: "14.5px", lineHeight: "1.8", marginBottom: "20px" }}>
+            {matchedStory?.excerpt ||
+              `For centuries, travelers and pilgrims have traversed the terrain of ${destination.name}. Rooted in generational craftsmanship, sacred architecture, and deep harmony with nature, the culture here is preserved not in museums alone, but in daily rituals, hospitality, and living songs passed down through time.`}
+          </p>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid var(--border-subtle)", paddingTop: "16px" }}>
+            <span style={{ fontSize: "12px", color: "var(--accent-gold-light)" }}>
+              {matchedStory ? `Written by ${matchedStory.author} • ${matchedStory.readTime}` : `Astravia Cultural Expedition Archive • Curated Heritage`}
+            </span>
+            <Link to={`/journey/${destination.id}`} style={{ fontSize: "11px", letterSpacing: "1.5px", color: "var(--text-primary)", fontWeight: "bold" }}>
+              EXPERIENCE SPATIALLY &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Day-by-Day Expedition Itinerary */}
       {destination.itinerary && destination.itinerary.length > 0 && (
         <section style={{ padding: "60px 4vw 100px", background: "var(--bg-surface)" }}>
@@ -299,8 +341,8 @@ export function Destination({ savedIds = [], onToggleSave }) {
           </div>
 
           <div style={{ textAlign: "center", marginTop: "40px" }}>
-            <Link to="/plan" className="btn-primary">
-              CUSTOMIZE THIS ITINERARY &rarr;
+            <Link to={`/itinerary?destination=${destination.id}`} className="btn-primary">
+              BUILD MY ITINERARY WITH {destination.name.toUpperCase()} &rarr;
             </Link>
           </div>
         </section>

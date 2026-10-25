@@ -44,7 +44,9 @@ export function TourQuizModal({ quiz = [], destinationName = "", destinationId =
         };
         localStorage.setItem("astravia_quiz_scores", JSON.stringify(history));
         if (onQuizComplete) onQuizComplete();
-      } catch (e) {}
+      } catch {
+        // Storage access error fallback
+      }
     }
   };
 
@@ -58,7 +60,7 @@ export function TourQuizModal({ quiz = [], destinationName = "", destinationId =
     if (navigator.share) {
       try {
         await navigator.share(shareData);
-      } catch (err) {
+      } catch {
         // Fallback to copy
         copyToClipboard();
       }

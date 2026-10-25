@@ -7,9 +7,13 @@ import destinations, { countries, regions } from "../data/destinations";
  * Strictly binds countryId to its regions and associated destinations.
  */
 export function CountryDetail() {
-  const { countryId } = useParams();
+  const { country: countryParam, countryId } = useParams();
+  const rawTarget = countryParam || countryId || "";
+  const targetId = rawTarget.toLowerCase().trim();
 
-  const country = countries.find((c) => c.id === countryId);
+  const country = countries.find(
+    (c) => c.id.toLowerCase() === targetId || c.name.toLowerCase() === targetId
+  );
 
   if (!country) {
     return (
@@ -29,7 +33,7 @@ export function CountryDetail() {
           Country Not Found
         </h1>
         <p style={{ color: "var(--text-secondary)", maxWidth: "480px", marginBottom: "32px", fontSize: "14px" }}>
-          The country "{countryId}" does not exist in our global index.
+          The country "{rawTarget}" does not exist in our global index.
         </p>
         <Link to="/countries" className="btn-primary">
           EXPLORE ALL COUNTRIES &rarr;
@@ -38,8 +42,11 @@ export function CountryDetail() {
     );
   }
 
-  // Filter regions strictly by countryId
+  // Filter regions strictly by countryId, or find all destinations in this country
   const countryRegions = regions.filter((r) => r.countryId === country.id);
+  const countryDestinations = destinations.filter(
+    (d) => d.countryId === country.id || (d.country && d.country.toLowerCase() === country.name.toLowerCase())
+  );
 
   return (
     <main style={{ paddingTop: "120px", paddingBottom: "100px", minHeight: "85vh" }}>
@@ -58,41 +65,72 @@ export function CountryDetail() {
       </div>
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 4vw", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "28px" }}>
-        {countryRegions.map((st) => {
-          const dest = destinations.find((d) => d.id === st.destinationId);
-          if (!dest) return null;
+        {countryRegions.length > 0
+          ? countryRegions.map((st) => {
+              const dest = destinations.find((d) => d.id === st.destinationId);
+              if (!dest) return null;
 
-          return (
-            <article key={st.id} className="destination-card-3d" style={{ height: "420px", transform: "none" }}>
-              <div
-                className="card-bg-image"
-                style={{ backgroundImage: `url(${st.image || dest.image})` }}
-              />
-              <div className="card-gradient-scrim" />
+              return (
+                <article key={st.id} className="destination-card-3d" style={{ height: "420px", transform: "none" }}>
+                  <div
+                    className="card-bg-image"
+                    style={{ backgroundImage: `url(${st.image || dest.image})` }}
+                  />
+                  <div className="card-gradient-scrim" />
 
-              <div className="card-top-badges">
-                <span className="card-category-badge">{st.tag || dest.category}</span>
-              </div>
+                  <div className="card-top-badges">
+                    <span className="card-category-badge">{st.tag || dest.category}</span>
+                  </div>
 
-              <div className="card-body-content">
-                <p className="card-region-label">Capital: {st.capital}</p>
-                <h3 className="card-destination-title" style={{ fontSize: "22px" }}>{st.name}</h3>
-                <p className="card-destination-desc" style={{ marginBottom: "14px" }}>
-                  Destination: {dest.name} ({dest.tagline})
-                </p>
+                  <div className="card-body-content">
+                    <p className="card-region-label">Capital: {st.capital}</p>
+                    <h3 className="card-destination-title" style={{ fontSize: "22px" }}>{st.name}</h3>
+                    <p className="card-destination-desc" style={{ marginBottom: "14px" }}>
+                      Destination: {dest.name} ({dest.tagline})
+                    </p>
 
-                <div style={{ display: "flex", gap: "10px" }}>
-                  <Link to={`/destination/${dest.id}`} className="card-action-btn" style={{ flex: 1 }}>
-                    OVERVIEW
-                  </Link>
-                  <Link to={`/virtual-journey/${dest.id}`} className="card-action-btn" style={{ flex: 1, background: "var(--accent-gold)", color: "#060c0e" }}>
-                    VIRTUAL 360° &rarr;
-                  </Link>
+                    <div style={{ display: "flex", gap: "10px" }}>
+                      <Link to={`/destination/${dest.id}`} className="card-action-btn" style={{ flex: 1 }}>
+                        OVERVIEW
+                      </Link>
+                      <Link to={`/journey/${dest.id}`} className="card-action-btn" style={{ flex: 1, background: "var(--accent-gold)", color: "#060c0e" }}>
+                        VIRTUAL 360° &rarr;
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              );
+            })
+          : countryDestinations.map((dest) => (
+              <article key={dest.id} className="destination-card-3d" style={{ height: "420px", transform: "none" }}>
+                <div
+                  className="card-bg-image"
+                  style={{ backgroundImage: `url(${dest.image})` }}
+                />
+                <div className="card-gradient-scrim" />
+
+                <div className="card-top-badges">
+                  <span className="card-category-badge">{dest.category}</span>
                 </div>
-              </div>
-            </article>
-          );
-        })}
+
+                <div className="card-body-content">
+                  <p className="card-region-label">{dest.region || country.name}</p>
+                  <h3 className="card-destination-title" style={{ fontSize: "22px" }}>{dest.name}</h3>
+                  <p className="card-destination-desc" style={{ marginBottom: "14px" }}>
+                    {dest.tagline}
+                  </p>
+
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <Link to={`/destination/${dest.id}`} className="card-action-btn" style={{ flex: 1 }}>
+                      OVERVIEW
+                    </Link>
+                    <Link to={`/journey/${dest.id}`} className="card-action-btn" style={{ flex: 1, background: "var(--accent-gold)", color: "#060c0e" }}>
+                      VIRTUAL 360° &rarr;
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
       </div>
     </main>
   );

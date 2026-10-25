@@ -25,6 +25,8 @@ export function GlobalWorldMap({ onSelectDestination }) {
       paris: { x: 49.5, y: 31.0 },
       rome: { x: 52.0, y: 35.5 },
       santorini: { x: 56.5, y: 39.0 },
+      zermatt: { x: 50.8, y: 33.0 },
+      reykjavik: { x: 43.5, y: 17.5 },
       tokyo: { x: 88.0, y: 36.0 },
       "taj-mahal": { x: 72.0, y: 38.0 },
       kashmir: { x: 71.0, y: 34.0 },
@@ -36,7 +38,8 @@ export function GlobalWorldMap({ onSelectDestination }) {
       "machu-picchu": { x: 30.5, y: 64.0 },
       cairo: { x: 57.5, y: 40.0 },
       "new-york": { x: 26.5, y: 34.0 },
-      dubai: { x: 63.5, y: 42.5 }
+      dubai: { x: 63.5, y: 42.5 },
+      sydney: { x: 86.5, y: 76.5 }
     };
     return coordsMap[dest.id] || { x: dest.coordinates?.x || 50, y: dest.coordinates?.y || 50 };
   };
@@ -187,7 +190,7 @@ export function GlobalWorldMap({ onSelectDestination }) {
                 OVERVIEW
               </Link>
               <Link
-                to={`/virtual-journey/${activeDestination.id}`}
+                to={`/journey/${activeDestination.id}`}
                 className="btn-primary"
                 style={{ padding: "7px 12px", fontSize: "9px", flex: 1, textAlign: "center" }}
               >

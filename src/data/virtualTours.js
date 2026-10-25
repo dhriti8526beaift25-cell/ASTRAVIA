@@ -875,6 +875,131 @@ export const virtualTours = {
         ]
       }
     ]
+  },
+
+  // 16. ZERMATT (Switzerland)
+  zermatt: {
+    destinationId: "zermatt",
+    destinationName: "Zermatt & Matterhorn",
+    country: "Switzerland",
+    tagline: "Glacial Majesty beneath the Matterhorn",
+    scenes: [
+      {
+        id: "zermatt-matterhorn-scene",
+        destinationId: "zermatt",
+        title: "Gornergrat Alpine Vista & The Matterhorn",
+        subtitle: "Swiss Alps • 3,135m Elevation",
+        panoramaUrl: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=2600&auto=format&fit=crop",
+        soundProfile: "alpine_wind",
+        initialLon: 180,
+        initialLat: 5,
+        description: "Gaze across 29 high-alpine glaciers and the unmistakable pyramid crest of the Matterhorn piercing the azure European sky.",
+        hotspots: [
+          {
+            id: "matterhorn-spire",
+            sceneId: "zermatt-matterhorn-scene",
+            destinationId: "zermatt",
+            title: "The Matterhorn Peak (4,478m)",
+            subtitle: "Global Alpine Icon",
+            lon: 180,
+            lat: 16,
+            category: "NATURE",
+            image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800&auto=format&fit=crop",
+            description: "Four steep triangular faces facing the cardinal compass points, shaped by glacial erosion over millions of years.",
+            fact: "The Matterhorn is depicted on iconic Swiss chocolate and represents the pinnacle of mountaineering.",
+            narration: "Before you stands the Matterhorn, the most photographed mountain peak in the world, rising 4,478 meters above sea level."
+          },
+          {
+            id: "gorner-glacier",
+            sceneId: "zermatt-matterhorn-scene",
+            destinationId: "zermatt",
+            title: "Gorner Glacier System",
+            subtitle: "Ancient Alpine Ice Stream",
+            lon: 230,
+            lat: -14,
+            category: "NATURE",
+            image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800&auto=format&fit=crop",
+            description: "The second largest glacial system in the Alps, stretching across the Monte Rosa massif.",
+            fact: "Gorner Glacier features deep turquoise crevasses and dynamic glacial meltwater rivers.",
+            narration: "The vast Gorner Glacier carves its way through the mountain pass beneath you, carrying centuries of compressed blue ice."
+          }
+        ]
+      }
+    ]
+  },
+
+  // 17. SYDNEY (Australia)
+  sydney: {
+    destinationId: "sydney",
+    destinationName: "Sydney & Harbour",
+    country: "Australia",
+    tagline: "Harbour of Light & Architectural Sails",
+    scenes: [
+      {
+        id: "sydney-harbour-scene",
+        destinationId: "sydney",
+        title: "Circular Quay & Opera House Panorama",
+        subtitle: "Sydney Harbour • Pacific Horizon",
+        panoramaUrl: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=2600&auto=format&fit=crop",
+        soundProfile: "ocean_waves",
+        initialLon: 0,
+        initialLat: 0,
+        description: "Stand at the water's edge in Sydney Harbour, surrounded by the world-famous Opera House sails and bustling green and yellow ferries.",
+        hotspots: [
+          {
+            id: "opera-house-shell",
+            sceneId: "sydney-harbour-scene",
+            destinationId: "sydney",
+            title: "Sydney Opera House Sails",
+            subtitle: "Jørn Utzon UNESCO Monument",
+            lon: 350,
+            lat: 10,
+            category: "ARCHITECTURE",
+            image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=800&auto=format&fit=crop",
+            description: "Inaugurated in 1973, this expressionist architectural wonder hosts over 1,500 performances annually.",
+            fact: "The soaring shells were constructed using precast concrete panels based on the geometry of a single sphere.",
+            narration: "You are looking at the Sydney Opera House. Its radiant ceramic tiles catch the sun and reflect the Pacific Ocean waters."
+          }
+        ]
+      }
+    ]
+  },
+
+  // 18. REYKJAVIK (Iceland)
+  reykjavik: {
+    destinationId: "reykjavik",
+    destinationName: "Reykjavik & Iceland",
+    country: "Iceland",
+    tagline: "Fire, Ice & Celestial Auroras",
+    scenes: [
+      {
+        id: "iceland-gullfoss-scene",
+        destinationId: "reykjavik",
+        title: "Gullfoss Golden Waterfall & Canyon",
+        subtitle: "Hvítá Glacial River • South Iceland",
+        panoramaUrl: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=2600&auto=format&fit=crop",
+        soundProfile: "alpine_wind",
+        initialLon: 90,
+        initialLat: 0,
+        description: "Feel the glacial mist of Gullfoss, plunging 32 meters into a deep basalt gorge fed by Langjökull glacier.",
+        hotspots: [
+          {
+            id: "gullfoss-cataract",
+            sceneId: "iceland-gullfoss-scene",
+            destinationId: "reykjavik",
+            title: "Gullfoss Double Cascade",
+            subtitle: "Glacial Canyon Fissure",
+            lon: 95,
+            lat: -8,
+            category: "NATURE",
+            image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?q=80&w=800&auto=format&fit=crop",
+            description: "Surging with glacial runoff at up to 140 cubic meters per second during summer.",
+            fact: "Protected in the early 20th century by Sigríður Tómasdóttir, recognized as Iceland's first environmentalist.",
+            narration: "Gullfoss, or the Golden Falls, roars with power as glacial meltwater from Langjökull plunges down a dramatic two-tiered canyon."
+          }
+        ]
+      }
+    ]
   }
 };
 

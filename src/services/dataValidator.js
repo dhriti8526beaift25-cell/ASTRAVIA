@@ -4,7 +4,7 @@
  * quiz question, and itinerary record is strictly bound to its parent destination ID.
  */
 
-import destinations, { regions, countries, continents } from "../data/destinations.js";
+import destinations from "../data/destinations.js";
 import { virtualTours } from "../data/virtualTours.js";
 
 export function validateAstraviaData() {

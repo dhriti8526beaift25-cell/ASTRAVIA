@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import destinations from "../data/destinations";
 
@@ -7,20 +7,20 @@ import destinations from "../data/destinations";
  * Inspires exploration by algorithmically choosing a surprise world destination
  * with cinematic reveal animations and quick actions.
  */
+const REASONS_LIST = [
+  "Perfect match for travelers seeking profound serenity and scenic majesty.",
+  "Selected for its peerless architectural heritage and world-class culinary soul.",
+  "Curated for explorers who desire untamed natural wonders and mountain vistas.",
+  "Chosen for its iconic coastal sunsets and timeless ancient traditions.",
+  "Recommended for high-altitude stargazing and cosmic silence."
+];
+
 export function SurpriseMeModal({ isOpen, onClose, onToggleSave, savedIds = [] }) {
   const [loading, setLoading] = useState(true);
   const [selectedDest, setSelectedDest] = useState(null);
   const [reason, setReason] = useState("");
 
-  const reasonsList = [
-    "Perfect match for travelers seeking profound serenity and scenic majesty.",
-    "Selected for its peerless architectural heritage and world-class culinary soul.",
-    "Curated for explorers who desire untamed natural wonders and mountain vistas.",
-    "Chosen for its iconic coastal sunsets and timeless ancient traditions.",
-    "Recommended for high-altitude stargazing and cosmic silence."
-  ];
-
-  const pickRandomDestination = () => {
+  const pickRandomDestination = useCallback(() => {
     setLoading(true);
     setTimeout(() => {
       try {
@@ -29,7 +29,7 @@ export function SurpriseMeModal({ isOpen, onClose, onToggleSave, savedIds = [] }
         const pool = available.length > 0 ? available : destinations;
         const randomDest = pool[Math.floor(Math.random() * pool.length)] || destinations.find((d) => d.id === "paris");
 
-        const randomReason = reasonsList[Math.floor(Math.random() * reasonsList.length)];
+        const randomReason = REASONS_LIST[Math.floor(Math.random() * REASONS_LIST.length)];
 
         setSelectedDest(randomDest);
         setReason(randomReason);
@@ -37,18 +37,18 @@ export function SurpriseMeModal({ isOpen, onClose, onToggleSave, savedIds = [] }
         // Update recently suggested
         const updatedRecent = [...recent, randomDest.id].slice(-6);
         localStorage.setItem("astravia_recent_surprises", JSON.stringify(updatedRecent));
-      } catch (e) {
+      } catch {
         setSelectedDest(destinations.find((d) => d.id === "paris"));
       }
       setLoading(false);
     }, 650);
-  };
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
       pickRandomDestination();
     }
-  }, [isOpen]);
+  }, [isOpen, pickRandomDestination]);
 
   if (!isOpen) return null;
 

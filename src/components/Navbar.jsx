@@ -32,17 +32,20 @@ export function Navbar({ savedCount = 0, isAudioPlaying, onToggleAudio }) {
 
         {/* Simplified Primary Navigation */}
         <nav className="nav-links-desktop" aria-label="Main Navigation">
-          <NavLink to="/discover" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`}>
-            DISCOVER
+          <NavLink to="/" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`} end>
+            HOME
           </NavLink>
-          <NavLink to="/experiences" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`}>
-            EXPERIENCES
+          <NavLink to="/explore" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`}>
+            EXPLORE
+          </NavLink>
+          <NavLink to="/countries" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`}>
+            COUNTRIES
+          </NavLink>
+          <NavLink to="/itinerary" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`}>
+            ITINERARY
           </NavLink>
           <NavLink to="/my-journey" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`}>
             MY JOURNEY
-          </NavLink>
-          <NavLink to="/plan" className={({ isActive }) => `nav-link-item ${isActive ? "active" : ""}`}>
-            PLAN
           </NavLink>
         </nav>
 
@@ -92,11 +95,12 @@ export function Navbar({ savedCount = 0, isAudioPlaying, onToggleAudio }) {
         {mobileMenuOpen && (
           <div className="mobile-nav-drawer open">
             <ul className="mobile-nav-links">
-              <li><NavLink to="/" onClick={closeMenu}>HOME</NavLink></li>
-              <li><NavLink to="/discover" onClick={closeMenu}>DISCOVER</NavLink></li>
-              <li><NavLink to="/experiences" onClick={closeMenu}>EXPERIENCES</NavLink></li>
+              <li><NavLink to="/" onClick={closeMenu} end>HOME</NavLink></li>
+              <li><NavLink to="/explore" onClick={closeMenu}>EXPLORE THE WORLD</NavLink></li>
+              <li><NavLink to="/countries" onClick={closeMenu}>COUNTRIES</NavLink></li>
+              <li><NavLink to="/itinerary" onClick={closeMenu}>ITINERARY BUILDER</NavLink></li>
               <li><NavLink to="/my-journey" onClick={closeMenu}>MY JOURNEY ({savedCount})</NavLink></li>
-              <li><NavLink to="/plan" onClick={closeMenu}>PLAN TRIP</NavLink></li>
+              <li><NavLink to="/experiences" onClick={closeMenu}>CURATED EXPERIENCES</NavLink></li>
             </ul>
           </div>
         )}

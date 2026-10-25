@@ -51,19 +51,47 @@ export function Hero() {
 
         {/* Hero Action CTAs */}
         <div className="hero-cta-group">
-          <Link to="/discover" className="btn-primary">
-            ENTER THE JOURNEY &rarr;
+          <Link to="/journey/kashmir" className="btn-primary" id="hero-cta-primary">
+            ENTER 360° EXPERIENCE &rarr;
           </Link>
-          <Link to="/discover" className="btn-secondary">
-            DISCOVER THE WORLD
+          <Link to="/explore" className="btn-secondary" id="hero-cta-secondary">
+            EXPLORE THE WORLD
           </Link>
         </div>
       </div>
 
+      {/* Floating Side Social Icons */}
+      <aside className="hero-social-strip" aria-label="Social Channels">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" title="Instagram" aria-label="Astravia on Instagram">
+          <span>IG</span>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" title="360° Virtual Expeditions on YouTube" aria-label="360 Virtual Expeditions on YouTube">
+          <span>YT</span>
+        </a>
+        <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" title="X (Twitter)" aria-label="Astravia on X">
+          <span>𝕏</span>
+        </a>
+        <span className="hero-social-divider" aria-hidden="true" />
+        <span className="hero-social-tag" aria-hidden="true">GLOBAL</span>
+      </aside>
+
       {/* Mouse Scroll Indicator */}
-      <div className="hero-scroll-indicator" aria-hidden="true">
+      <div
+        className="hero-scroll-indicator"
+        onClick={() => {
+          window.scrollBy({ top: window.innerHeight * 0.85, behavior: "smooth" });
+        }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            window.scrollBy({ top: window.innerHeight * 0.85, behavior: "smooth" });
+          }
+        }}
+        aria-label="Scroll to discover continents"
+      >
         <span>SCROLL TO EXPLORE</span>
-        <div className="mouse-scroll-icon">
+        <div className="mouse-scroll-icon" aria-hidden="true">
           <div className="mouse-wheel"></div>
         </div>
       </div>

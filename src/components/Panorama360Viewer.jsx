@@ -189,7 +189,6 @@ export function Panorama360Viewer({
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
       const w = container.clientWidth;
-      const h = container.clientHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -197,19 +196,21 @@ export function Panorama360Viewer({
 
     window.addEventListener("resize", handleResize);
 
+    const currentState = stateRef.current;
+
     return () => {
       window.removeEventListener("resize", handleResize);
-      if (stateRef.current.animationFrameId) {
-        cancelAnimationFrame(stateRef.current.animationFrameId);
+      if (currentState.animationFrameId) {
+        cancelAnimationFrame(currentState.animationFrameId);
       }
-      if (stateRef.current.renderer) {
-        stateRef.current.renderer.dispose();
+      if (currentState.renderer) {
+        currentState.renderer.dispose();
       }
-      if (stateRef.current.geometry) {
-        stateRef.current.geometry.dispose();
+      if (currentState.geometry) {
+        currentState.geometry.dispose();
       }
-      if (stateRef.current.material) {
-        stateRef.current.material.dispose();
+      if (currentState.material) {
+        currentState.material.dispose();
       }
     };
   }, [panoramaUrl, hotspots, getHotspot3DPos]);
@@ -262,6 +263,26 @@ export function Panorama360Viewer({
     state.targetFov = Math.max(45, Math.min(95, state.targetFov + e.deltaY * 0.05));
   };
 
+  const handleZoomIn = (e) => {
+    e.stopPropagation();
+    const state = stateRef.current;
+    state.targetFov = Math.max(40, state.targetFov - 10);
+  };
+
+  const handleZoomOut = (e) => {
+    e.stopPropagation();
+    const state = stateRef.current;
+    state.targetFov = Math.min(90, state.targetFov + 10);
+  };
+
+  const handleResetView = (e) => {
+    e.stopPropagation();
+    const state = stateRef.current;
+    state.targetLon = initialLon;
+    state.targetLat = initialLat;
+    state.targetFov = 75;
+  };
+
   return (
     <div
       style={{
@@ -283,6 +304,53 @@ export function Panorama360Viewer({
     >
       {/* WebGL Canvas Mount Container */}
       <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
+
+      {/* On-Screen Zoom & View Controls Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          right: "24px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+          zIndex: 35,
+          pointerEvents: "auto"
+        }}
+        aria-label="Viewer zoom and perspective controls"
+      >
+        <button
+          type="button"
+          onClick={handleZoomIn}
+          className="tour-tool-btn"
+          style={{ width: "38px", height: "38px", padding: 0, fontSize: "18px", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "center" }}
+          title="Zoom In (+)"
+          aria-label="Zoom in"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          onClick={handleZoomOut}
+          className="tour-tool-btn"
+          style={{ width: "38px", height: "38px", padding: 0, fontSize: "18px", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "center" }}
+          title="Zoom Out (-)"
+          aria-label="Zoom out"
+        >
+          &minus;
+        </button>
+        <button
+          type="button"
+          onClick={handleResetView}
+          className="tour-tool-btn"
+          style={{ width: "38px", height: "38px", padding: 0, fontSize: "14px", fontWeight: "bold", display: "flex", alignItems: "center", justifyContent: "center" }}
+          title="Reset Perspective"
+          aria-label="Reset perspective"
+        >
+          ⟲
+        </button>
+      </div>
 
       {/* Cinematic Loading Overlay */}
       {isLoading && (
